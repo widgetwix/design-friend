@@ -30,7 +30,7 @@ export default function DesignPersona() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 pb-24">
+    <div className="min-h-screen bg-[#F2E6DF] pb-24">
       {/* Header */}
       <header className="pt-12 px-4 pb-6">
         <motion.div
@@ -38,8 +38,8 @@ export default function DesignPersona() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <p className="text-sm text-indigo-600 font-medium mb-2">Your Design Persona</p>
-          <h1 className="text-3xl font-bold text-gray-800">
+          <p className="text-sm text-[#C84C35] font-mono uppercase tracking-wider mb-2">Your Design Persona</p>
+          <h1 className="text-3xl font-bold text-[#1A1A1A] font-headline">
             {designPersona.styleName}
           </h1>
         </motion.div>
@@ -52,8 +52,8 @@ export default function DesignPersona() {
         transition={{ delay: 0.2 }}
         className="px-4 mb-6"
       >
-        <div className="relative h-32 rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+        <div className="relative h-32 border border-[#1A1A1A] overflow-hidden">
+          <div className="absolute inset-0 bg-[#1A1A1A]" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex -space-x-4">
               {likedImages.slice(0, 4).map((img, i) => (
@@ -64,7 +64,7 @@ export default function DesignPersona() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-lg"
+                  className="w-16 h-16 object-cover border-2 border-[#F2E6DF] shadow-lg"
                 />
               ))}
               {likedImages.length > 4 && (
@@ -72,9 +72,9 @@ export default function DesignPersona() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.7 }}
-                  className="w-16 h-16 rounded-full bg-white/90 border-4 border-white shadow-lg flex items-center justify-center"
+                  className="w-16 h-16 bg-[#F2E6DF] border-2 border-[#F2E6DF] shadow-lg flex items-center justify-center"
                 >
-                  <span className="text-sm font-bold text-gray-600">+{likedImages.length - 4}</span>
+                  <span className="text-sm font-bold text-[#1A1A1A]">+{likedImages.length - 4}</span>
                 </motion.div>
               )}
             </div>
@@ -84,7 +84,7 @@ export default function DesignPersona() {
 
       {/* Section tabs */}
       <div className="px-4 mb-4">
-        <div className="flex bg-gray-100 rounded-xl p-1">
+        <div className="flex border border-[#1A1A1A]">
           {[
             { id: 'summary', label: 'Summary' },
             { id: 'shopping', label: 'Shop Keywords' }
@@ -92,10 +92,10 @@ export default function DesignPersona() {
             <button
               key={tab.id}
               onClick={() => setActiveSection(tab.id)}
-              className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`flex-1 py-2 text-sm font-mono uppercase tracking-wider transition-all ${
                 activeSection === tab.id
-                  ? 'bg-white text-gray-800 shadow-sm'
-                  : 'text-gray-500'
+                  ? 'bg-[#1A1A1A] text-[#F2E6DF]'
+                  : 'bg-transparent text-[#1A1A1A]/60 hover:bg-[#1A1A1A]/5'
               }`}
             >
               {tab.label}
@@ -110,14 +110,14 @@ export default function DesignPersona() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-sm"
+            className="bg-[#F2E6DF] border border-[#1A1A1A] p-6"
           >
             {/* Style tags */}
             <div className="flex flex-wrap gap-2 mb-4">
               {designPersona.dominantStyles?.map((style) => (
                 <span
                   key={style}
-                  className="px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full text-sm font-medium"
+                  className="px-3 py-1 bg-[#1A1A1A] text-[#F2E6DF] text-sm font-mono uppercase tracking-wider"
                 >
                   {style}
                 </span>
@@ -127,7 +127,7 @@ export default function DesignPersona() {
             {/* Summary text */}
             <div className="space-y-4">
               {designPersona.summary.split('\n\n').map((paragraph, i) => (
-                <p key={i} className="text-gray-700 leading-relaxed">
+                <p key={i} className="text-[#1A1A1A] leading-relaxed">
                   {paragraph}
                 </p>
               ))}
@@ -135,13 +135,13 @@ export default function DesignPersona() {
 
             {/* Top characteristics */}
             {designPersona.topTags && (
-              <div className="mt-6 pt-6 border-t border-gray-100">
-                <h3 className="text-sm font-semibold text-gray-800 mb-3">Key Characteristics</h3>
+              <div className="mt-6 pt-6 border-t border-[#1A1A1A]/20">
+                <h3 className="text-sm font-semibold text-[#1A1A1A] mb-3">Key Characteristics</h3>
                 <div className="flex flex-wrap gap-2">
                   {designPersona.topTags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm"
+                      className="px-3 py-1 border border-[#1A1A1A]/30 text-[#1A1A1A]/80 text-sm"
                     >
                       {tag}
                     </span>
@@ -158,7 +158,7 @@ export default function DesignPersona() {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-3"
           >
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-[#1A1A1A]/60 mb-4">
               Copy these long-tail search terms to find furniture and decor that matches your style:
             </p>
             {designPersona.shoppingKeywords?.map((keyword, i) => (
@@ -167,12 +167,12 @@ export default function DesignPersona() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-white rounded-xl p-4 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow"
+                className="bg-[#F2E6DF] border border-[#1A1A1A] p-4 flex items-center justify-between group hover:bg-[#1A1A1A]/5 transition-colors"
               >
-                <span className="text-gray-700 flex-1">{keyword}</span>
+                <span className="text-[#1A1A1A] flex-1">{keyword}</span>
                 <button
                   onClick={() => navigator.clipboard.writeText(keyword)}
-                  className="ml-2 p-2 text-gray-400 hover:text-indigo-600 transition-colors"
+                  className="ml-2 p-2 text-[#1A1A1A]/40 hover:text-[#C84C35] transition-colors"
                   title="Copy to clipboard"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -194,7 +194,7 @@ export default function DesignPersona() {
       >
         <button
           onClick={() => setStage('inspiration')}
-          className="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg"
+          className="w-full py-4 bg-[#1A1A1A] text-[#F2E6DF] font-semibold"
         >
           View Inspiration Board
         </button>

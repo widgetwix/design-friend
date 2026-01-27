@@ -49,7 +49,7 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
   if (!isTop) {
     return (
       <div
-        className="absolute inset-0 rounded-2xl overflow-hidden shadow-lg"
+        className="absolute inset-0 border border-[#1A1A1A] overflow-hidden shadow-lg"
         style={{ transform: 'scale(0.95)', opacity: 0.7 }}
       >
         <img
@@ -63,7 +63,7 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
 
   return (
     <motion.div
-      className="absolute inset-0 rounded-2xl overflow-hidden shadow-xl cursor-grab active:cursor-grabbing touch-none"
+      className="absolute inset-0 border border-[#1A1A1A] overflow-hidden shadow-xl cursor-grab active:cursor-grabbing touch-none"
       style={{ x, y, rotate, opacity }}
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -85,7 +85,7 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
 
       {/* Image info */}
       <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-        <span className="inline-block px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium mb-2">
+        <span className="inline-block px-2 py-1 bg-[#1A1A1A]/80 text-xs font-mono uppercase tracking-wider mb-2">
           {image.style}
         </span>
         <p className="text-sm opacity-90">{image.description}</p>
@@ -93,30 +93,30 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
 
       {/* Like overlay */}
       <motion.div
-        className="absolute inset-0 bg-green-500/30 flex items-center justify-center"
+        className="absolute inset-0 bg-[#C84C35]/30 flex items-center justify-center"
         style={{ opacity: likeOpacity }}
       >
-        <div className="bg-green-500 text-white px-6 py-3 rounded-xl text-2xl font-bold transform -rotate-12 border-4 border-white">
+        <div className="bg-[#C84C35] text-[#F2E6DF] px-6 py-3 text-2xl font-bold font-mono uppercase tracking-wider transform -rotate-12 border-2 border-[#F2E6DF]">
           LIKE
         </div>
       </motion.div>
 
       {/* Nope overlay */}
       <motion.div
-        className="absolute inset-0 bg-red-500/30 flex items-center justify-center"
+        className="absolute inset-0 bg-[#1A1A1A]/30 flex items-center justify-center"
         style={{ opacity: nopeOpacity }}
       >
-        <div className="bg-red-500 text-white px-6 py-3 rounded-xl text-2xl font-bold transform rotate-12 border-4 border-white">
+        <div className="bg-[#1A1A1A] text-[#F2E6DF] px-6 py-3 text-2xl font-bold font-mono uppercase tracking-wider transform rotate-12 border-2 border-[#F2E6DF]">
           NOPE
         </div>
       </motion.div>
 
       {/* Unsure overlay */}
       <motion.div
-        className="absolute inset-0 bg-yellow-500/30 flex items-center justify-center"
+        className="absolute inset-0 bg-[#1A1A1A]/20 flex items-center justify-center"
         style={{ opacity: unsureOpacity }}
       >
-        <div className="bg-yellow-500 text-white px-4 py-3 rounded-xl text-xl font-bold border-4 border-white">
+        <div className="bg-[#F2E6DF] text-[#1A1A1A] px-4 py-3 text-xl font-bold font-mono uppercase tracking-wider border-2 border-[#1A1A1A]">
           NOT SURE
         </div>
       </motion.div>

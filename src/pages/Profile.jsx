@@ -24,15 +24,15 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 pb-24">
+    <div className="min-h-screen bg-[#F2E6DF] pb-24">
       {/* Header */}
       <header className="pt-12 px-4 pb-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-2xl font-bold text-gray-800">My Profile</h1>
-          <p className="text-sm text-gray-500 mt-1">Your design journey</p>
+          <h1 className="text-2xl font-bold text-[#1A1A1A] font-headline">My Profile</h1>
+          <p className="text-sm text-[#1A1A1A]/60 mt-1">Your design journey</p>
         </motion.div>
       </header>
 
@@ -44,21 +44,21 @@ export default function Profile() {
           className="mx-4 mb-6"
         >
           <div
-            className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-white cursor-pointer"
+            className="bg-[#1A1A1A] border border-[#1A1A1A] p-6 text-[#F2E6DF] cursor-pointer"
             onClick={() => setStage('persona')}
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-medium text-white/70">MY DESIGN PERSONA</span>
-              <svg className="w-5 h-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#F2E6DF]/70">MY DESIGN PERSONA</span>
+              <svg className="w-5 h-5 text-[#F2E6DF]/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold mb-2">{designPersona.styleName}</h2>
+            <h2 className="text-2xl font-bold font-headline mb-2">{designPersona.styleName}</h2>
             <div className="flex flex-wrap gap-2">
               {designPersona.dominantStyles?.slice(0, 2).map((style) => (
                 <span
                   key={style}
-                  className="px-2 py-1 bg-white/20 rounded-full text-xs"
+                  className="px-2 py-1 bg-[#F2E6DF]/20 text-xs font-mono uppercase tracking-wider"
                 >
                   {style}
                 </span>
@@ -75,18 +75,18 @@ export default function Profile() {
         transition={{ delay: 0.1 }}
         className="mx-4 mb-6 flex gap-4"
       >
-        <div className="flex-1 bg-white rounded-xl p-4 shadow-sm text-center">
-          <p className="text-2xl font-bold text-indigo-600">{bookmarks.length}</p>
-          <p className="text-xs text-gray-500">Bookmarked</p>
+        <div className="flex-1 bg-[#F2E6DF] border border-[#1A1A1A] p-4 text-center">
+          <p className="text-2xl font-bold text-[#C84C35]">{bookmarks.length}</p>
+          <p className="text-xs text-[#1A1A1A]/60 font-mono uppercase">Bookmarked</p>
         </div>
         <div
-          className="flex-1 bg-white rounded-xl p-4 shadow-sm text-center cursor-pointer hover:shadow-md transition-shadow"
+          className="flex-1 bg-[#F2E6DF] border border-[#1A1A1A] p-4 text-center cursor-pointer hover:bg-[#1A1A1A]/5 transition-colors"
           onClick={() => setStage('inspiration')}
         >
-          <p className="text-2xl font-bold text-purple-600">
+          <p className="text-2xl font-bold text-[#1A1A1A]">
             {designPersona?.shoppingKeywords?.length || 0}
           </p>
-          <p className="text-xs text-gray-500">Shop Keywords</p>
+          <p className="text-xs text-[#1A1A1A]/60 font-mono uppercase">Shop Keywords</p>
         </div>
       </motion.div>
 
@@ -98,11 +98,11 @@ export default function Profile() {
         className="mx-4 mb-6"
       >
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-800">Saved Bookmarks</h3>
+          <h3 className="text-lg font-semibold text-[#1A1A1A]">Saved Bookmarks</h3>
           {bookmarkedImages.length > 3 && (
             <button
               onClick={() => setStage('inspiration')}
-              className="text-sm text-indigo-600 font-medium"
+              className="text-sm text-[#C84C35] font-medium"
             >
               See all
             </button>
@@ -114,7 +114,7 @@ export default function Profile() {
             {bookmarkedImages.map((image) => (
               <div
                 key={image.id}
-                className="relative flex-shrink-0 w-28 h-36 rounded-xl overflow-hidden shadow-md"
+                className="relative flex-shrink-0 w-28 h-36 border border-[#1A1A1A] overflow-hidden"
               >
                 <img
                   src={image.url}
@@ -131,14 +131,14 @@ export default function Profile() {
             ))}
           </div>
         ) : (
-          <div className="bg-gray-50 rounded-xl p-6 text-center">
-            <svg className="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="bg-[#1A1A1A]/5 border border-[#1A1A1A]/20 p-6 text-center">
+            <svg className="w-12 h-12 mx-auto text-[#1A1A1A]/30 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
             </svg>
-            <p className="text-gray-500 text-sm">No bookmarks yet</p>
+            <p className="text-[#1A1A1A]/60 text-sm">No bookmarks yet</p>
             <button
               onClick={() => setStage('inspiration')}
-              className="mt-2 text-indigo-600 text-sm font-medium"
+              className="mt-2 text-[#C84C35] text-sm font-medium"
             >
               Browse your inspiration board
             </button>
@@ -153,14 +153,14 @@ export default function Profile() {
         transition={{ delay: 0.3 }}
         className="mx-4"
       >
-        <div className="bg-white rounded-xl p-4 shadow-sm">
-          <h3 className="font-semibold text-gray-800 mb-2">Ready for a refresh?</h3>
-          <p className="text-sm text-gray-500 mb-4">
+        <div className="bg-[#F2E6DF] border border-[#1A1A1A] p-4">
+          <h3 className="font-semibold text-[#1A1A1A] mb-2">Ready for a refresh?</h3>
+          <p className="text-sm text-[#1A1A1A]/60 mb-4">
             Retake the quiz to discover a new design persona. Your bookmarks will be saved.
           </p>
           <button
             onClick={() => setShowConfirmReset(true)}
-            className="w-full py-3 border-2 border-indigo-500 text-indigo-600 font-medium rounded-xl hover:bg-indigo-50 transition-colors"
+            className="w-full py-3 border border-[#C84C35] text-[#C84C35] font-medium hover:bg-[#C84C35]/10 transition-colors"
           >
             Retake Style Quiz
           </button>
@@ -172,23 +172,23 @@ export default function Profile() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-[#1A1A1A]/50 z-50 flex items-center justify-center p-4"
           onClick={() => setShowConfirmReset(false)}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-xl"
+            className="bg-[#F2E6DF] border border-[#1A1A1A] p-6 max-w-sm w-full"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="text-center mb-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-indigo-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-16 h-16 mx-auto mb-4 bg-[#1A1A1A]/10 flex items-center justify-center">
+                <svg className="w-8 h-8 text-[#1A1A1A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Retake Quiz?</h3>
-              <p className="text-sm text-gray-500">
+              <h3 className="text-lg font-bold text-[#1A1A1A] font-headline mb-2">Retake Quiz?</h3>
+              <p className="text-sm text-[#1A1A1A]/60">
                 Your current design persona will be replaced, but your bookmarked images will be saved.
               </p>
             </div>
@@ -196,13 +196,13 @@ export default function Profile() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowConfirmReset(false)}
-                className="flex-1 py-3 border border-gray-200 text-gray-600 rounded-xl font-medium"
+                className="flex-1 py-3 border border-[#1A1A1A] text-[#1A1A1A] font-medium"
               >
                 Cancel
               </button>
               <button
                 onClick={handleRetakeQuiz}
-                className="flex-1 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-medium"
+                className="flex-1 py-3 bg-[#C84C35] text-[#F2E6DF] font-medium"
               >
                 Start Over
               </button>
