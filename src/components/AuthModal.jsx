@@ -121,14 +121,14 @@ export default function AuthModal({ isOpen, onClose }) {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden"
+              className="bg-[#F2E6DF] border border-[#1A1A1A] shadow-xl w-full max-w-md overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
               <button
                 onClick={onClose}
                 aria-label="Close"
-                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute top-4 right-4 p-2 text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -138,10 +138,10 @@ export default function AuthModal({ isOpen, onClose }) {
               <div className="p-6">
                 {/* Header */}
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl font-bold text-gray-800">
+                  <h2 className="text-2xl font-bold text-[#1A1A1A] font-headline">
                     {mode === 'signin' ? 'Welcome Back' : 'Create Account'}
                   </h2>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-sm text-[#1A1A1A]/60 mt-1">
                     {mode === 'signin'
                       ? 'Sign in to continue your design journey'
                       : 'Join Design Friend to discover your style'
@@ -154,7 +154,7 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     onClick={handleGoogleSignIn}
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors disabled:opacity-50"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -162,28 +162,28 @@ export default function AuthModal({ isOpen, onClose }) {
                       <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                       <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                     </svg>
-                    <span className="text-gray-700 font-medium">Continue with Google</span>
+                    <span className="text-[#1A1A1A] font-medium">Continue with Google</span>
                   </button>
 
                   <button
                     onClick={handleFacebookSignIn}
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors disabled:opacity-50"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
-                    <span className="text-gray-700 font-medium">Continue with Facebook</span>
+                    <span className="text-[#1A1A1A] font-medium">Continue with Facebook</span>
                   </button>
                 </div>
 
                 {/* Divider */}
                 <div className="relative mb-6">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
+                    <div className="w-full border-t border-[#1A1A1A]/20" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white text-gray-500">or</span>
+                    <span className="px-4 bg-[#F2E6DF] text-[#1A1A1A]/60 font-mono uppercase tracking-wider text-xs">or</span>
                   </div>
                 </div>
 
@@ -196,12 +196,12 @@ export default function AuthModal({ isOpen, onClose }) {
                         placeholder="Full Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                          errors.name ? 'border-red-500' : 'border-gray-200'
+                        className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-1 focus:ring-[#C84C35] ${
+                          errors.name ? 'border-[#C84C35]' : 'border-[#1A1A1A]'
                         }`}
                       />
                       {errors.name && (
-                        <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                        <p className="mt-1 text-sm text-[#C84C35]">{errors.name}</p>
                       )}
                     </div>
                   )}
@@ -212,12 +212,12 @@ export default function AuthModal({ isOpen, onClose }) {
                       placeholder="Email Address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                        errors.email ? 'border-red-500' : 'border-gray-200'
+                      className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-1 focus:ring-[#C84C35] ${
+                        errors.email ? 'border-[#C84C35]' : 'border-[#1A1A1A]'
                       }`}
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                      <p className="mt-1 text-sm text-[#C84C35]">{errors.email}</p>
                     )}
                   </div>
 
@@ -227,17 +227,17 @@ export default function AuthModal({ isOpen, onClose }) {
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                        errors.password ? 'border-red-500' : 'border-gray-200'
+                      className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-1 focus:ring-[#C84C35] ${
+                        errors.password ? 'border-[#C84C35]' : 'border-[#1A1A1A]'
                       }`}
                     />
                     {errors.password && (
-                      <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                      <p className="mt-1 text-sm text-[#C84C35]">{errors.password}</p>
                     )}
                   </div>
 
                   {(errors.submit || authError) && (
-                    <p className="text-sm text-red-500 text-center">
+                    <p className="text-sm text-[#C84C35] text-center">
                       {errors.submit || authError}
                     </p>
                   )}
@@ -245,20 +245,20 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="w-full py-3 bg-[#1A1A1A] text-[#F2E6DF] font-semibold hover:bg-[#1A1A1A]/90 transition-colors disabled:opacity-50"
                   >
                     {isSubmitting ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
                   </button>
                 </form>
 
                 {/* Switch mode */}
-                <p className="mt-6 text-center text-sm text-gray-500">
+                <p className="mt-6 text-center text-sm text-[#1A1A1A]/60">
                   {mode === 'signin' ? (
                     <>
                       Don't have an account?{' '}
                       <button
                         onClick={switchMode}
-                        className="text-indigo-600 font-medium hover:underline"
+                        className="text-[#C84C35] font-medium hover:underline"
                       >
                         Create an account
                       </button>
@@ -268,7 +268,7 @@ export default function AuthModal({ isOpen, onClose }) {
                       Already have an account?{' '}
                       <button
                         onClick={switchMode}
-                        className="text-indigo-600 font-medium hover:underline"
+                        className="text-[#C84C35] font-medium hover:underline"
                       >
                         Sign in
                       </button>

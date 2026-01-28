@@ -8,13 +8,13 @@ export default function BookmarkButton({ isBookmarked, onClick }) {
         e.stopPropagation();
         onClick();
       }}
-      className="p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md"
+      className="p-2 bg-[#F2E6DF]/90 backdrop-blur-sm shadow-md"
     >
       <motion.svg
         animate={{ scale: isBookmarked ? [1, 1.3, 1] : 1 }}
         transition={{ duration: 0.3 }}
         className={`w-5 h-5 transition-colors ${
-          isBookmarked ? 'text-indigo-600 fill-indigo-600' : 'text-gray-600'
+          isBookmarked ? 'text-[#C84C35] fill-[#C84C35]' : 'text-[#1A1A1A]'
         }`}
         fill={isBookmarked ? 'currentColor' : 'none'}
         viewBox="0 0 24 24"

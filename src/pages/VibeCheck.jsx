@@ -32,7 +32,7 @@ export default function VibeCheck() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-[#F2E6DF] flex flex-col items-center justify-center p-6">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -44,9 +44,9 @@ export default function VibeCheck() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring' }}
-          className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg"
+          className="w-20 h-20 mx-auto mb-6 bg-[#1A1A1A] flex items-center justify-center"
         >
-          <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-10 h-10 text-[#F2E6DF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
         </motion.div>
@@ -55,7 +55,7 @@ export default function VibeCheck() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-2xl font-bold text-gray-800 mb-2"
+          className="text-2xl font-bold text-[#1A1A1A] font-headline mb-2"
         >
           Vibe Check Complete!
         </motion.h1>
@@ -64,7 +64,7 @@ export default function VibeCheck() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-sm text-gray-500 mb-6"
+          className="text-sm text-[#1A1A1A]/60 mb-6"
         >
           Here's what we discovered about your style
         </motion.p>
@@ -74,9 +74,9 @@ export default function VibeCheck() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white rounded-2xl p-6 shadow-lg mb-8 text-left"
+          className="bg-[#F2E6DF] border border-[#1A1A1A] p-6 mb-8 text-left"
         >
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-[#1A1A1A] leading-relaxed">
             {vibeCheckResult?.summary}
           </p>
 
@@ -86,7 +86,7 @@ export default function VibeCheck() {
               {vibeCheckResult.dominantStyles.map((style) => (
                 <span
                   key={style}
-                  className="px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full text-sm font-medium"
+                  className="px-3 py-1 bg-[#1A1A1A] text-[#F2E6DF] text-sm font-mono uppercase tracking-wider"
                 >
                   {style}
                 </span>
@@ -103,13 +103,13 @@ export default function VibeCheck() {
           className="flex justify-center gap-6 mb-8"
         >
           <div className="text-center">
-            <p className="text-2xl font-bold text-indigo-600">{likedImages.length}</p>
-            <p className="text-xs text-gray-500">Loved</p>
+            <p className="text-2xl font-bold text-[#C84C35]">{likedImages.length}</p>
+            <p className="text-xs text-[#1A1A1A]/60 font-mono uppercase">Loved</p>
           </div>
-          <div className="w-px bg-gray-200" />
+          <div className="w-px bg-[#1A1A1A]/20" />
           <div className="text-center">
-            <p className="text-2xl font-bold text-purple-600">{deepDiveImages.length}</p>
-            <p className="text-xs text-gray-500">To explore</p>
+            <p className="text-2xl font-bold text-[#1A1A1A]">{deepDiveImages.length}</p>
+            <p className="text-xs text-[#1A1A1A]/60 font-mono uppercase">To explore</p>
           </div>
         </motion.div>
 
@@ -121,12 +121,12 @@ export default function VibeCheck() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleContinue}
-          className="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg"
+          className="w-full py-4 bg-[#1A1A1A] text-[#F2E6DF] font-semibold"
         >
           {deepDiveImages.length > 0 ? 'Start Deep Dive' : 'See My Persona'}
         </motion.button>
 
-        <p className="text-xs text-gray-400 mt-4">
+        <p className="text-xs text-[#1A1A1A]/40 mt-4">
           {deepDiveImages.length > 0
             ? "Let's explore what specifically caught your eye"
             : "We'll generate your unique design persona"

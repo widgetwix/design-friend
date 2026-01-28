@@ -11,15 +11,15 @@ export default function InspirationBoard() {
   const getAnnotation = (imageId) => annotations.find(a => a.imageId === imageId);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 pb-24">
+    <div className="min-h-screen bg-[#F2E6DF] pb-24">
       {/* Header */}
       <header className="pt-12 px-4 pb-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-2xl font-bold text-gray-800">Inspiration Board</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-[#1A1A1A] font-headline">Inspiration Board</h1>
+          <p className="text-sm text-[#1A1A1A]/60 mt-1 font-mono">
             {likedImages.length} images you loved
           </p>
         </motion.div>
@@ -41,7 +41,7 @@ export default function InspirationBoard() {
                 className="masonry-item"
               >
                 <div
-                  className="relative rounded-xl overflow-hidden shadow-md cursor-pointer group"
+                  className="relative border border-[#1A1A1A] overflow-hidden cursor-pointer group"
                   onClick={() => setSelectedImage(image)}
                 >
                   <img
@@ -52,7 +52,7 @@ export default function InspirationBoard() {
                   />
 
                   {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   {/* Bookmark button */}
                   <div className="absolute top-2 right-2">
@@ -64,7 +64,7 @@ export default function InspirationBoard() {
 
                   {/* Style badge */}
                   <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="inline-block px-2 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-gray-700">
+                    <span className="inline-block px-2 py-1 bg-[#F2E6DF] text-xs font-mono uppercase tracking-wider text-[#1A1A1A]">
                       {image.style}
                     </span>
                   </div>
@@ -72,8 +72,8 @@ export default function InspirationBoard() {
                   {/* Annotation indicator */}
                   {annotation && annotation.note && (
                     <div className="absolute top-2 left-2">
-                      <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center shadow-md">
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="w-6 h-6 bg-[#C84C35] flex items-center justify-center shadow-md">
+                        <svg className="w-3 h-3 text-[#F2E6DF]" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                         </svg>
                       </div>
@@ -92,7 +92,7 @@ export default function InspirationBoard() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-[#1A1A1A]/90 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
           <motion.div
@@ -104,7 +104,7 @@ export default function InspirationBoard() {
             {/* Close button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-white/80 hover:text-white"
+              className="absolute -top-12 right-0 text-[#F2E6DF]/80 hover:text-[#F2E6DF]"
             >
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -115,7 +115,7 @@ export default function InspirationBoard() {
             <img
               src={selectedImage.url}
               alt={selectedImage.description}
-              className="w-full rounded-2xl"
+              className="w-full border border-[#F2E6DF]/30"
             />
 
             {/* Annotation pin */}
@@ -128,14 +128,14 @@ export default function InspirationBoard() {
                   transform: 'translate(-50%, -50%)'
                 }}
               >
-                <div className="w-8 h-8 bg-indigo-500 rounded-full border-4 border-white shadow-lg animate-pulse" />
+                <div className="w-8 h-8 bg-[#C84C35] border-2 border-[#F2E6DF] shadow-lg animate-pulse" />
               </div>
             )}
 
             {/* Info card */}
-            <div className="mt-4 bg-white rounded-xl p-4">
+            <div className="mt-4 bg-[#F2E6DF] border border-[#1A1A1A] p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">
+                <span className="px-2 py-1 bg-[#1A1A1A] text-[#F2E6DF] text-xs font-mono uppercase tracking-wider">
                   {selectedImage.style}
                 </span>
                 <BookmarkButton
@@ -143,13 +143,13 @@ export default function InspirationBoard() {
                   onClick={() => toggleBookmark(selectedImage.id)}
                 />
               </div>
-              <p className="text-gray-700 text-sm">{selectedImage.description}</p>
+              <p className="text-[#1A1A1A] text-sm">{selectedImage.description}</p>
 
               {/* User annotation */}
               {getAnnotation(selectedImage.id)?.note && (
-                <div className="mt-3 pt-3 border-t border-gray-100">
-                  <p className="text-xs text-gray-400 mb-1">Your note:</p>
-                  <p className="text-gray-600 text-sm italic">
+                <div className="mt-3 pt-3 border-t border-[#1A1A1A]/20">
+                  <p className="text-xs text-[#1A1A1A]/40 mb-1 font-mono uppercase">Your note:</p>
+                  <p className="text-[#1A1A1A]/80 text-sm italic">
                     "{getAnnotation(selectedImage.id).note}"
                   </p>
                 </div>
@@ -160,7 +160,7 @@ export default function InspirationBoard() {
                 {selectedImage.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs"
+                    className="px-2 py-0.5 border border-[#1A1A1A]/30 text-[#1A1A1A]/60 text-xs"
                   >
                     {tag}
                   </span>

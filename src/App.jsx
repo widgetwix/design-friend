@@ -19,7 +19,7 @@ function AppContent() {
   // Show auth modal if not authenticated
   if (!isAuthenticated && showAuthModal) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#F2E6DF] flex items-center justify-center">
         <AuthModal isOpen={true} onClose={() => setShowAuthModal(false)} />
       </div>
     );
@@ -57,7 +57,7 @@ function App() {
   return (
     <AuthProvider>
       <AppProvider>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-[#F2E6DF]">
           <AppContent />
         </div>
       </AppProvider>
