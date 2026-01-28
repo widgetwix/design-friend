@@ -2,6 +2,8 @@
 
 An interactive mobile web app that helps users discover their unique interior design style through a two-stage image sorting and annotation process.
 
+Built with the **Tactile Minimalism** design system featuring a warm Blush Plaster background, sharp editorial corners, and a refined color palette.
+
 ## App Overview
 
 Design Friend guides users through a personalized interior design discovery journey:
