@@ -44,7 +44,9 @@ export default function Navigation() {
             <button
               key={tab.id}
               onClick={() => setStage(tab.id)}
-              className={`flex flex-col items-center py-2 px-4 transition-colors ${
+              aria-label={`Go to ${tab.label}`}
+              aria-current={isActive ? 'page' : undefined}
+              className={`flex flex-col items-center py-2 px-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2 ${
                 isActive ? 'text-[#C84C35]' : 'text-[#1A1A1A]/40 hover:text-[#1A1A1A]/60'
               }`}
             >

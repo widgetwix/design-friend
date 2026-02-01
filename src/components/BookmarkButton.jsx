@@ -8,7 +8,8 @@ export default function BookmarkButton({ isBookmarked, onClick }) {
         e.stopPropagation();
         onClick();
       }}
-      className="p-2 bg-[#F2E6DF]/90 backdrop-blur-sm shadow-md"
+      aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+      className="p-2 bg-[#F2E6DF]/90 backdrop-blur-sm shadow-md focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
     >
       <motion.svg
         animate={{ scale: isBookmarked ? [1, 1.3, 1] : 1 }}
