@@ -127,8 +127,8 @@ export default function AuthModal({ isOpen, onClose }) {
               {/* Close button */}
               <button
                 onClick={onClose}
-                aria-label="Close"
-                className="absolute top-4 right-4 p-2 text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors"
+                aria-label="Close modal"
+                className="absolute top-4 right-4 p-2 text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -154,7 +154,7 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     onClick={handleGoogleSignIn}
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -168,7 +168,7 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     onClick={handleFacebookSignIn}
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -191,48 +191,60 @@ export default function AuthModal({ isOpen, onClose }) {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {mode === 'signup' && (
                     <div>
+                      <label htmlFor="auth-name" className="sr-only">Full Name</label>
                       <input
+                        id="auth-name"
                         type="text"
                         placeholder="Full Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-1 focus:ring-[#C84C35] ${
+                        aria-invalid={errors.name ? 'true' : 'false'}
+                        aria-describedby={errors.name ? 'name-error' : undefined}
+                        className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] ${
                           errors.name ? 'border-[#C84C35]' : 'border-[#1A1A1A]'
                         }`}
                       />
                       {errors.name && (
-                        <p className="mt-1 text-sm text-[#C84C35]">{errors.name}</p>
+                        <p id="name-error" className="mt-1 text-sm text-[#C84C35]">{errors.name}</p>
                       )}
                     </div>
                   )}
 
                   <div>
+                    <label htmlFor="auth-email" className="sr-only">Email Address</label>
                     <input
+                      id="auth-email"
                       type="email"
                       placeholder="Email Address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-1 focus:ring-[#C84C35] ${
+                      aria-invalid={errors.email ? 'true' : 'false'}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
+                      className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] ${
                         errors.email ? 'border-[#C84C35]' : 'border-[#1A1A1A]'
                       }`}
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-[#C84C35]">{errors.email}</p>
+                      <p id="email-error" className="mt-1 text-sm text-[#C84C35]">{errors.email}</p>
                     )}
                   </div>
 
                   <div>
+                    <label htmlFor="auth-password" className="sr-only">Password</label>
                     <input
+                      id="auth-password"
                       type="password"
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-1 focus:ring-[#C84C35] ${
+                      aria-invalid={errors.password ? 'true' : 'false'}
+                      aria-describedby={errors.password ? 'password-error' : undefined}
+                      className={`w-full px-4 py-3 border bg-transparent focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] ${
                         errors.password ? 'border-[#C84C35]' : 'border-[#1A1A1A]'
                       }`}
                     />
                     {errors.password && (
-                      <p className="mt-1 text-sm text-[#C84C35]">{errors.password}</p>
+                      <p id="password-error" className="mt-1 text-sm text-[#C84C35]">{errors.password}</p>
                     )}
                   </div>
 
@@ -245,7 +257,7 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-[#1A1A1A] text-[#F2E6DF] font-semibold hover:bg-[#1A1A1A]/90 transition-colors disabled:opacity-50"
+                    className="w-full py-3 bg-[#1A1A1A] text-[#F2E6DF] font-semibold hover:bg-[#1A1A1A]/90 transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
                   >
                     {isSubmitting ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
                   </button>
@@ -258,7 +270,7 @@ export default function AuthModal({ isOpen, onClose }) {
                       Don't have an account?{' '}
                       <button
                         onClick={switchMode}
-                        className="text-[#C84C35] font-medium hover:underline"
+                        className="text-[#1A1A1A] font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
                       >
                         Create an account
                       </button>
@@ -268,7 +280,7 @@ export default function AuthModal({ isOpen, onClose }) {
                       Already have an account?{' '}
                       <button
                         onClick={switchMode}
-                        className="text-[#C84C35] font-medium hover:underline"
+                        className="text-[#1A1A1A] font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
                       >
                         Sign in
                       </button>

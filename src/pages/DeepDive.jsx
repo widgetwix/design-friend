@@ -10,7 +10,8 @@ export default function DeepDive() {
     addAnnotation,
     nextDeepDiveImage,
     annotations,
-    swipeResults
+    swipeResults,
+    setStage
   } = useApp();
 
   const [pinPosition, setPinPosition] = useState(null);
@@ -60,14 +61,25 @@ export default function DeepDive() {
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] flex flex-col">
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-10 pt-12 px-4">
+      {/* Header with Back Arrow */}
+      <header className="absolute top-0 left-0 right-0 z-10 pt-8 px-4">
         <div className="flex items-center justify-between text-[#F2E6DF]">
-          <div>
-            <h1 className="text-lg font-semibold font-headline">Deep Dive</h1>
-            <p className="text-sm text-[#F2E6DF]/60 font-mono">
-              {deepDiveIndex + 1} of {deepDiveImages.length}
-            </p>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setStage('discovery')}
+              aria-label="Go back"
+              className="p-2 -ml-2 text-[#F2E6DF] hover:bg-[#F2E6DF]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#F2E6DF] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <div>
+              <span className="text-sm font-mono uppercase tracking-wider text-[#F2E6DF]/60">Deep Dive</span>
+              <p className="text-sm text-[#F2E6DF] font-mono">
+                {deepDiveIndex + 1} of {deepDiveImages.length}
+              </p>
+            </div>
           </div>
           <span className={`px-3 py-1 text-xs font-mono uppercase tracking-wider ${
             isLiked ? 'bg-[#C84C35]/20 text-[#C84C35]' : 'bg-[#F2E6DF]/20 text-[#F2E6DF]'
@@ -119,7 +131,7 @@ export default function DeepDive() {
                   transform: 'translate(-50%, -50%)'
                 }}
               >
-                <div className="w-8 h-8 bg-[#C84C35] border-2 border-[#F2E6DF] shadow-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-[#C84C35] border border-[#F2E6DF] shadow-lg flex items-center justify-center">
                   <svg className="w-4 h-4 text-[#F2E6DF]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -139,7 +151,7 @@ export default function DeepDive() {
                   transform: 'translate(-50%, -50%)'
                 }}
               >
-                <div className="w-8 h-8 bg-[#C84C35] border-2 border-[#F2E6DF] shadow-lg animate-pulse" />
+                <div className="w-8 h-8 bg-[#C84C35] border border-[#F2E6DF] shadow-lg animate-pulse" />
               </motion.div>
             )}
 
@@ -173,14 +185,14 @@ export default function DeepDive() {
       <div className="p-4 pb-8 flex gap-3">
         <button
           onClick={handleSkip}
-          className="flex-1 py-4 border border-[#F2E6DF]/30 text-[#F2E6DF] font-medium hover:bg-[#F2E6DF]/10 transition-colors"
+          className="flex-1 py-4 border border-[#F2E6DF]/30 text-[#F2E6DF] font-medium hover:bg-[#F2E6DF]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#F2E6DF] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
         >
           Skip
         </button>
         <button
           onClick={handleNext}
           disabled={!existingAnnotation}
-          className={`flex-1 py-4 font-medium transition-all ${
+          className={`flex-1 py-4 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:ring-offset-2 focus:ring-offset-[#1A1A1A] ${
             existingAnnotation
               ? 'bg-[#C84C35] text-[#F2E6DF]'
               : 'bg-[#F2E6DF]/5 text-[#F2E6DF]/30 cursor-not-allowed'

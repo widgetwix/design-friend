@@ -43,7 +43,7 @@ export default function ProfileDisplay({ onLoginClick }) {
       >
         <button
           onClick={onLoginClick}
-          className="px-4 py-2 text-sm font-medium text-[#1A1A1A] bg-[#F2E6DF] border border-[#1A1A1A] shadow-md hover:bg-[#1A1A1A]/5 transition-colors"
+          className="px-4 py-2 text-sm font-medium text-[#1A1A1A] bg-[#F2E6DF] border border-[#1A1A1A] shadow-md hover:bg-[#1A1A1A]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
         >
           Sign In
         </button>
@@ -60,7 +60,9 @@ export default function ProfileDisplay({ onLoginClick }) {
       {/* Avatar button */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="relative w-10 h-10 overflow-hidden shadow-md hover:shadow-lg transition-shadow focus:outline-none focus:ring-1 focus:ring-[#C84C35] focus:ring-offset-2"
+        aria-label="Open profile menu"
+        aria-expanded={showDropdown}
+        className="relative w-10 h-10 overflow-hidden shadow-md hover:shadow-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
       >
         {user?.photoURL ? (
           <img
@@ -114,7 +116,7 @@ export default function ProfileDisplay({ onLoginClick }) {
             <div className="p-2">
               <button
                 onClick={handleSignOut}
-                className="w-full flex items-center gap-3 px-3 py-2 text-left text-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors"
+                className="w-full flex items-center gap-3 px-3 py-2 text-left text-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#1A1A1A]"
               >
                 <svg className="w-5 h-5 text-[#1A1A1A]/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

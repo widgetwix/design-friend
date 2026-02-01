@@ -8,7 +8,7 @@ export default function LoadingScreen({ message = 'Analyzing your style...' }) {
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
-            className="absolute inset-0 border-2 border-[#1A1A1A]"
+            className="absolute inset-0 border border-[#1A1A1A]"
             initial={{ scale: 0, opacity: 1 }}
             animate={{ scale: 2, opacity: 0 }}
             transition={{

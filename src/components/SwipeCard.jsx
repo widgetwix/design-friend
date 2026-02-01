@@ -71,6 +71,7 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
       onDragEnd={handleDragEnd}
       animate={{ x: exitX, y: exitY }}
       transition={{ duration: 0.3 }}
+      aria-label={`Interior design image: ${image.description}`}
     >
       {/* Image */}
       <img
@@ -80,23 +81,12 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
         draggable={false}
       />
 
-      {/* Gradient overlay for text */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-      {/* Image info */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-        <span className="inline-block px-2 py-1 bg-[#1A1A1A]/80 text-xs font-mono uppercase tracking-wider mb-2">
-          {image.style}
-        </span>
-        <p className="text-sm opacity-90">{image.description}</p>
-      </div>
-
       {/* Like overlay */}
       <motion.div
         className="absolute inset-0 bg-[#C84C35]/30 flex items-center justify-center"
         style={{ opacity: likeOpacity }}
       >
-        <div className="bg-[#C84C35] text-[#F2E6DF] px-6 py-3 text-2xl font-bold font-mono uppercase tracking-wider transform -rotate-12 border-2 border-[#F2E6DF]">
+        <div className="bg-[#C84C35] text-[#F2E6DF] px-6 py-3 text-2xl font-bold font-mono uppercase tracking-wider transform -rotate-12 border border-[#F2E6DF]">
           LIKE
         </div>
       </motion.div>
@@ -106,7 +96,7 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
         className="absolute inset-0 bg-[#1A1A1A]/30 flex items-center justify-center"
         style={{ opacity: nopeOpacity }}
       >
-        <div className="bg-[#1A1A1A] text-[#F2E6DF] px-6 py-3 text-2xl font-bold font-mono uppercase tracking-wider transform rotate-12 border-2 border-[#F2E6DF]">
+        <div className="bg-[#1A1A1A] text-[#F2E6DF] px-6 py-3 text-2xl font-bold font-mono uppercase tracking-wider transform rotate-12 border border-[#F2E6DF]">
           NOPE
         </div>
       </motion.div>
@@ -116,7 +106,7 @@ export default function SwipeCard({ image, onSwipe, isTop }) {
         className="absolute inset-0 bg-[#1A1A1A]/20 flex items-center justify-center"
         style={{ opacity: unsureOpacity }}
       >
-        <div className="bg-[#F2E6DF] text-[#1A1A1A] px-4 py-3 text-xl font-bold font-mono uppercase tracking-wider border-2 border-[#1A1A1A]">
+        <div className="bg-[#F2E6DF] text-[#1A1A1A] px-4 py-3 text-xl font-bold font-mono uppercase tracking-wider border border-[#1A1A1A]">
           NOT SURE
         </div>
       </motion.div>

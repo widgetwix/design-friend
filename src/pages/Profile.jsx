@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
 import BookmarkButton from '../components/BookmarkButton';
 import Navigation from '../components/Navigation';
 
@@ -13,6 +14,7 @@ export default function Profile() {
     images,
     setStage
   } = useApp();
+  const { user } = useAuth();
 
   const [showConfirmReset, setShowConfirmReset] = useState(false);
 
@@ -23,72 +25,103 @@ export default function Profile() {
     resetQuiz();
   };
 
+  // Get user initials for avatar
+  const getInitials = (name) => {
+    if (!name) return '?';
+    return name
+      .split(' ')
+      .map((word) => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <div className="min-h-screen bg-[#F2E6DF] pb-24">
-      {/* Header */}
-      <header className="pt-12 px-4 pb-6">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <h1 className="text-2xl font-bold text-[#1A1A1A] font-headline">My Profile</h1>
-          <p className="text-sm text-[#1A1A1A]/60 mt-1">Your design journey</p>
-        </motion.div>
+      {/* Header with Settings */}
+      <header className="pt-8 px-4 pb-4">
+        <div className="flex items-center justify-end">
+          <button
+            aria-label="Settings"
+            className="p-2 text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </button>
+        </div>
       </header>
+
+      {/* User Profile Card */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="px-4 pb-6"
+      >
+        <div className="flex flex-col items-center">
+          {/* Avatar with Edit Button */}
+          <div className="relative mb-4">
+            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#1A1A1A] bg-[#1A1A1A]">
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-[#F2E6DF] text-2xl font-bold">
+                  {getInitials(user?.displayName)}
+                </div>
+              )}
+            </div>
+            {/* Edit Button */}
+            <button
+              aria-label="Edit profile"
+              className="absolute bottom-0 right-0 w-8 h-8 bg-[#1A1A1A] border border-[#F2E6DF] rounded-full flex items-center justify-center text-[#F2E6DF] hover:bg-[#1A1A1A]/80 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </button>
+          </div>
+
+          {/* User Name */}
+          <h1 className="text-xl font-bold text-[#1A1A1A] font-headline">
+            {user?.displayName || 'Design Enthusiast'}
+          </h1>
+
+          {/* Location */}
+          <p className="text-sm text-[#1A1A1A]/60 font-mono mt-1">
+            San Francisco, CA
+          </p>
+        </div>
+      </motion.div>
 
       {/* Design Persona Card */}
       {designPersona && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
           className="mx-4 mb-6"
         >
           <div
-            className="bg-[#1A1A1A] border border-[#1A1A1A] p-6 text-[#F2E6DF] cursor-pointer"
+            className="bg-[#F2E6DF] border border-[#1A1A1A] p-4 cursor-pointer hover:bg-[#1A1A1A]/5 transition-colors"
             onClick={() => setStage('persona')}
           >
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono uppercase tracking-wider text-[#F2E6DF]/70">MY DESIGN PERSONA</span>
-              <svg className="w-5 h-5 text-[#F2E6DF]/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-[#1A1A1A]/60">MY DESIGN PERSONA</span>
+                <h2 className="text-lg font-bold font-headline text-[#1A1A1A] mt-1">{designPersona.styleName}</h2>
+              </div>
+              <svg className="w-5 h-5 text-[#1A1A1A]/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </div>
-            <h2 className="text-2xl font-bold font-headline mb-2">{designPersona.styleName}</h2>
-            <div className="flex flex-wrap gap-2">
-              {designPersona.dominantStyles?.slice(0, 2).map((style) => (
-                <span
-                  key={style}
-                  className="px-2 py-1 bg-[#F2E6DF]/20 text-xs font-mono uppercase tracking-wider"
-                >
-                  {style}
-                </span>
-              ))}
             </div>
           </div>
         </motion.div>
       )}
-
-      {/* Stats */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="mx-4 mb-6 flex gap-4"
-      >
-        <div className="flex-1 bg-[#F2E6DF] border border-[#1A1A1A] p-4 text-center">
-          <p className="text-2xl font-bold text-[#C84C35]">{bookmarks.length}</p>
-          <p className="text-xs text-[#1A1A1A]/60 font-mono uppercase">Bookmarked</p>
-        </div>
-        <div
-          className="flex-1 bg-[#F2E6DF] border border-[#1A1A1A] p-4 text-center cursor-pointer hover:bg-[#1A1A1A]/5 transition-colors"
-          onClick={() => setStage('inspiration')}
-        >
-          <p className="text-2xl font-bold text-[#1A1A1A]">
-            {designPersona?.shoppingKeywords?.length || 0}
-          </p>
-          <p className="text-xs text-[#1A1A1A]/60 font-mono uppercase">Shop Keywords</p>
-        </div>
-      </motion.div>
 
       {/* Saved Bookmarks */}
       <motion.div
@@ -99,34 +132,28 @@ export default function Profile() {
       >
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-[#1A1A1A]">Saved Bookmarks</h3>
-          {bookmarkedImages.length > 3 && (
+          {bookmarkedImages.length > 0 && (
             <button
               onClick={() => setStage('inspiration')}
-              className="text-sm text-[#C84C35] font-medium"
+              className="text-sm text-[#C84C35] font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:ring-offset-2"
             >
-              See all
+              View All
             </button>
           )}
         </div>
 
         {bookmarkedImages.length > 0 ? (
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
-            {bookmarkedImages.map((image) => (
+            {bookmarkedImages.slice(0, 4).map((image) => (
               <div
                 key={image.id}
-                className="relative flex-shrink-0 w-28 h-36 border border-[#1A1A1A] overflow-hidden"
+                className="relative flex-shrink-0 w-24 h-24 border border-[#1A1A1A] overflow-hidden"
               >
                 <img
                   src={image.url}
                   alt={image.description}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-2 right-2">
-                  <BookmarkButton
-                    isBookmarked={true}
-                    onClick={() => toggleBookmark(image.id)}
-                  />
-                </div>
               </div>
             ))}
           </div>
@@ -135,10 +162,10 @@ export default function Profile() {
             <svg className="w-12 h-12 mx-auto text-[#1A1A1A]/30 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
             </svg>
-            <p className="text-[#1A1A1A]/60 text-sm">No bookmarks yet</p>
+            <p className="text-[#1A1A1A]/60 text-sm font-mono">No bookmarks yet</p>
             <button
               onClick={() => setStage('inspiration')}
-              className="mt-2 text-[#C84C35] text-sm font-medium"
+              className="mt-2 text-[#C84C35] text-sm font-medium hover:underline"
             >
               Browse your inspiration board
             </button>
@@ -146,25 +173,19 @@ export default function Profile() {
         )}
       </motion.div>
 
-      {/* Retake Quiz */}
+      {/* Retake Quiz Button */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
         className="mx-4"
       >
-        <div className="bg-[#F2E6DF] border border-[#1A1A1A] p-4">
-          <h3 className="font-semibold text-[#1A1A1A] mb-2">Ready for a refresh?</h3>
-          <p className="text-sm text-[#1A1A1A]/60 mb-4">
-            Retake the quiz to discover a new design persona. Your bookmarks will be saved.
-          </p>
-          <button
-            onClick={() => setShowConfirmReset(true)}
-            className="w-full py-3 border border-[#C84C35] text-[#C84C35] font-medium hover:bg-[#C84C35]/10 transition-colors"
-          >
-            Retake Style Quiz
-          </button>
-        </div>
+        <button
+          onClick={() => setShowConfirmReset(true)}
+          className="w-full py-4 border border-[#1A1A1A] text-[#1A1A1A] font-medium font-mono uppercase tracking-wider hover:bg-[#1A1A1A]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
+        >
+          Retake Style Quiz
+        </button>
       </motion.div>
 
       {/* Confirm Reset Modal */}
@@ -196,13 +217,13 @@ export default function Profile() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowConfirmReset(false)}
-                className="flex-1 py-3 border border-[#1A1A1A] text-[#1A1A1A] font-medium"
+                className="flex-1 py-3 border border-[#1A1A1A] text-[#1A1A1A] font-medium focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
               >
                 Cancel
               </button>
               <button
                 onClick={handleRetakeQuiz}
-                className="flex-1 py-3 bg-[#C84C35] text-[#F2E6DF] font-medium"
+                className="flex-1 py-3 bg-[#C84C35] text-[#F2E6DF] font-medium focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:ring-offset-2"
               >
                 Start Over
               </button>

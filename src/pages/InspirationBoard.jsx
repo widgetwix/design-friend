@@ -104,7 +104,8 @@ export default function InspirationBoard() {
             {/* Close button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-[#F2E6DF]/80 hover:text-[#F2E6DF]"
+              aria-label="Close image detail"
+              className="absolute -top-12 right-0 text-[#F2E6DF]/80 hover:text-[#F2E6DF] focus:outline-none focus:ring-2 focus:ring-[#F2E6DF] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
             >
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -128,7 +129,7 @@ export default function InspirationBoard() {
                   transform: 'translate(-50%, -50%)'
                 }}
               >
-                <div className="w-8 h-8 bg-[#C84C35] border-2 border-[#F2E6DF] shadow-lg animate-pulse" />
+                <div className="w-8 h-8 bg-[#C84C35] border border-[#F2E6DF] shadow-lg animate-pulse" />
               </div>
             )}
 
