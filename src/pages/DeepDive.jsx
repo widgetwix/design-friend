@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import AnnotationModal from '../components/AnnotationModal';
+
+const MAX_CHARS = 150;
 
 export default function DeepDive() {
   const {
@@ -15,7 +16,7 @@ export default function DeepDive() {
   } = useApp();
 
   const [pinPosition, setPinPosition] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [note, setNote] = useState('');
   const imageRef = useRef(null);
 
   const currentImage = deepDiveImages[deepDiveIndex];
@@ -31,76 +32,54 @@ export default function DeepDive() {
     const y = ((e.clientY - rect.top) / rect.height) * 100;
 
     setPinPosition({ x, y });
-    setShowModal(true);
   };
 
-  const handleAnnotationSubmit = (note) => {
-    if (pinPosition) {
-      addAnnotation(currentImage.id, pinPosition.x, pinPosition.y, note);
+  const handleNoteChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= MAX_CHARS) {
+      setNote(value);
     }
-    setShowModal(false);
-    setPinPosition(null);
   };
 
   const handleNext = () => {
+    if (pinPosition) {
+      addAnnotation(currentImage.id, pinPosition.x, pinPosition.y, note.trim());
+    } else if (!existingAnnotation) {
+      // Auto-add center annotation if no pin placed
+      addAnnotation(currentImage.id, 50, 50, note.trim());
+    }
     setPinPosition(null);
+    setNote('');
     nextDeepDiveImage();
-  };
-
-  const handleSkip = () => {
-    addAnnotation(currentImage.id, 50, 50, '');
-    handleNext();
   };
 
   if (!currentImage) {
     return null;
   }
 
-  const isLiked = swipeResults[currentImage.id] === 'like';
-  const isUnsure = swipeResults[currentImage.id] === 'unsure';
-
   return (
-    <div className="min-h-screen bg-[#1A1A1A] flex flex-col">
-      {/* Header with Back Arrow */}
-      <header className="absolute top-0 left-0 right-0 z-10 pt-8 px-4">
-        <div className="flex items-center justify-between text-[#F2E6DF]">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setStage('discovery')}
-              aria-label="Go back"
-              className="p-2 -ml-2 text-[#F2E6DF] hover:bg-[#F2E6DF]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#F2E6DF] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
-            >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <div>
-              <span className="text-sm font-mono uppercase tracking-wider text-[#F2E6DF]/60">Deep Dive</span>
-              <p className="text-sm text-[#F2E6DF] font-mono">
-                {deepDiveIndex + 1} of {deepDiveImages.length}
-              </p>
-            </div>
-          </div>
-          <span className={`px-3 py-1 text-xs font-mono uppercase tracking-wider ${
-            isLiked ? 'bg-[#C84C35]/20 text-[#C84C35]' : 'bg-[#F2E6DF]/20 text-[#F2E6DF]'
-          }`}>
-            {isLiked ? 'Loved' : 'Unsure'}
-          </span>
-        </div>
-
-        {/* Progress bar */}
-        <div className="mt-4 h-1 bg-[#F2E6DF]/20 overflow-hidden">
-          <motion.div
-            className="h-full bg-[#C84C35]"
-            initial={{ width: 0 }}
-            animate={{ width: `${((deepDiveIndex + 1) / deepDiveImages.length) * 100}%` }}
-            transition={{ duration: 0.3 }}
-          />
+    <div className="min-h-screen bg-[#F2E6DF] flex flex-col">
+      {/* Header */}
+      <header className="pt-8 px-4 pb-4">
+        <div className="flex items-center">
+          <button
+            onClick={() => setStage('discovery')}
+            aria-label="Go back"
+            className="p-2 -ml-2 text-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] focus:ring-offset-2"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <h1 className="flex-1 text-center text-lg font-semibold text-[#1A1A1A]">
+            Deep Dive
+          </h1>
+          <div className="w-10" /> {/* Spacer for centering */}
         </div>
       </header>
 
       {/* Image area */}
-      <div className="flex-1 flex items-center justify-center p-4 pt-28">
+      <div className="flex-1 px-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImage.id}
@@ -108,7 +87,7 @@ export default function DeepDive() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-md aspect-[3/4] border border-[#F2E6DF]/30 overflow-hidden shadow-2xl"
+            className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg"
           >
             <img
               ref={imageRef}
@@ -128,19 +107,16 @@ export default function DeepDive() {
                 style={{
                   left: `${existingAnnotation.x}%`,
                   top: `${existingAnnotation.y}%`,
-                  transform: 'translate(-50%, -50%)'
+                  transform: 'translate(-50%, -100%)'
                 }}
               >
-                <div className="w-8 h-8 bg-[#C84C35] border border-[#F2E6DF] shadow-lg flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#F2E6DF]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
+                <div className="w-6 h-6 bg-[#C84C35] rounded-full border-2 border-white shadow-lg" />
+                <div className="w-0.5 h-3 bg-[#C84C35] mx-auto -mt-0.5" />
               </motion.div>
             )}
 
             {/* New pin preview */}
-            {pinPosition && !showModal && (
+            {pinPosition && (
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -148,70 +124,46 @@ export default function DeepDive() {
                 style={{
                   left: `${pinPosition.x}%`,
                   top: `${pinPosition.y}%`,
-                  transform: 'translate(-50%, -50%)'
+                  transform: 'translate(-50%, -100%)'
                 }}
               >
-                <div className="w-8 h-8 bg-[#C84C35] border border-[#F2E6DF] shadow-lg animate-pulse" />
+                <div className="w-6 h-6 bg-[#C84C35] rounded-full border-2 border-white shadow-lg animate-pulse" />
+                <div className="w-0.5 h-3 bg-[#C84C35] mx-auto -mt-0.5" />
               </motion.div>
             )}
-
-            {/* Tap hint overlay */}
-            {!existingAnnotation && !pinPosition && (
-              <div className="absolute inset-0 bg-[#1A1A1A]/20 flex items-center justify-center pointer-events-none">
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="bg-[#F2E6DF] px-4 py-2 shadow-lg"
-                >
-                  <p className="text-sm font-medium text-[#1A1A1A]">
-                    Tap on what caught your eye
-                  </p>
-                </motion.div>
-              </div>
-            )}
-
-            {/* Style badge */}
-            <div className="absolute bottom-4 left-4 right-4">
-              <div className="bg-[#1A1A1A]/80 backdrop-blur-sm p-3">
-                <span className="text-[#F2E6DF]/80 text-xs font-mono uppercase tracking-wider">{currentImage.style}</span>
-                <p className="text-[#F2E6DF] text-sm mt-1">{currentImage.description}</p>
-              </div>
-            </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Action buttons */}
-      <div className="p-4 pb-8 flex gap-3">
-        <button
-          onClick={handleSkip}
-          className="flex-1 py-4 border border-[#F2E6DF]/30 text-[#F2E6DF] font-medium hover:bg-[#F2E6DF]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#F2E6DF] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
-        >
-          Skip
-        </button>
+      {/* Bottom Sheet */}
+      <div className="bg-[#F2E6DF] p-4 pb-8">
+        <h2 className="text-xl font-bold text-[#1A1A1A] font-headline mb-4">
+          Why did this catch your eye?
+        </h2>
+
+        <div className="relative mb-6">
+          <textarea
+            value={note}
+            onChange={handleNoteChange}
+            placeholder="I love the velvet texture..."
+            className="w-full h-24 p-4 border border-[#1A1A1A]/20 bg-white rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:border-transparent text-[#1A1A1A] placeholder:text-[#1A1A1A]/40"
+            maxLength={MAX_CHARS}
+          />
+          <span className="absolute bottom-3 right-3 text-xs font-mono text-[#1A1A1A]/40">
+            {note.length}/{MAX_CHARS}
+          </span>
+        </div>
+
         <button
           onClick={handleNext}
-          disabled={!existingAnnotation}
-          className={`flex-1 py-4 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:ring-offset-2 focus:ring-offset-[#1A1A1A] ${
-            existingAnnotation
-              ? 'bg-[#C84C35] text-[#F2E6DF]'
-              : 'bg-[#F2E6DF]/5 text-[#F2E6DF]/30 cursor-not-allowed'
-          }`}
+          className="w-full py-4 bg-[#C84C35] text-[#F2E6DF] font-semibold rounded-lg hover:bg-[#C84C35]/90 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:ring-offset-2"
         >
-          {deepDiveIndex < deepDiveImages.length - 1 ? 'Next' : 'Finish'}
+          Next
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </button>
       </div>
-
-      {/* Annotation Modal */}
-      <AnnotationModal
-        isOpen={showModal}
-        position={pinPosition}
-        onClose={() => {
-          setShowModal(false);
-          setPinPosition(null);
-        }}
-        onSubmit={handleAnnotationSubmit}
-      />
     </div>
   );
 }

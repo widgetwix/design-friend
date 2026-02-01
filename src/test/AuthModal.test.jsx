@@ -23,18 +23,18 @@ describe('AuthModal', () => {
     renderWithAuth(<AuthModal isOpen={true} onClose={mockOnClose} />);
 
     expect(screen.getByText('Welcome Back')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
   });
 
   it('should switch to sign up form when clicking create account', async () => {
     renderWithAuth(<AuthModal isOpen={true} onClose={mockOnClose} />);
 
-    const createAccountLink = screen.getByText(/create an account/i);
+    const createAccountLink = screen.getByText(/create one/i);
     await userEvent.click(createAccountLink);
 
     expect(screen.getByText('Create Account')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/full name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/full name/i)).toBeInTheDocument();
   });
 
   it('should show Google sign in button', () => {
@@ -52,7 +52,7 @@ describe('AuthModal', () => {
   it('should have email input with proper validation attributes', () => {
     renderWithAuth(<AuthModal isOpen={true} onClose={mockOnClose} />);
 
-    const emailInput = screen.getByPlaceholderText(/email/i);
+    const emailInput = screen.getByLabelText(/email address/i);
 
     // Verify the email input exists and has proper type for browser validation
     expect(emailInput).toBeInTheDocument();
@@ -62,8 +62,8 @@ describe('AuthModal', () => {
   it('should validate password length', async () => {
     renderWithAuth(<AuthModal isOpen={true} onClose={mockOnClose} />);
 
-    const emailInput = screen.getByPlaceholderText(/email/i);
-    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const emailInput = screen.getByLabelText(/email address/i);
+    const passwordInput = screen.getByLabelText(/password/i);
     const submitButton = screen.getByRole('button', { name: /sign in/i });
 
     await userEvent.type(emailInput, 'test@example.com');
@@ -79,10 +79,10 @@ describe('AuthModal', () => {
     renderWithAuth(<AuthModal isOpen={true} onClose={mockOnClose} />);
 
     // Switch to sign up
-    await userEvent.click(screen.getByText(/create an account/i));
+    await userEvent.click(screen.getByText(/create one/i));
 
-    const emailInput = screen.getByPlaceholderText(/email/i);
-    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const emailInput = screen.getByLabelText(/email address/i);
+    const passwordInput = screen.getByLabelText(/password/i);
     const submitButton = screen.getByRole('button', { name: /sign up/i });
 
     await userEvent.type(emailInput, 'test@example.com');
@@ -112,8 +112,8 @@ describe('AuthModal', () => {
   it('should show loading state during submission', async () => {
     renderWithAuth(<AuthModal isOpen={true} onClose={mockOnClose} />);
 
-    const emailInput = screen.getByPlaceholderText(/email/i);
-    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const emailInput = screen.getByLabelText(/email address/i);
+    const passwordInput = screen.getByLabelText(/password/i);
     const submitButton = screen.getByRole('button', { name: /sign in/i });
 
     await userEvent.type(emailInput, 'test@example.com');
