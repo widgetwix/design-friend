@@ -31,7 +31,7 @@ export default function DesignPersona() {
   return (
     <div className="min-h-screen bg-[#F2E6DF] pb-24">
       {/* Header with Back Arrow */}
-      <header className="pt-8 px-4 pb-4">
+      <header className="pt-12 px-4 pb-4">
         <div className="flex items-center justify-between">
           <button
             onClick={() => setStage('vibeCheck')}

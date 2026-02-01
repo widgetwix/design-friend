@@ -12,7 +12,7 @@ export default function DiscoveryFeed() {
   return (
     <div className="min-h-screen bg-[#F2E6DF] flex flex-col">
       {/* Header */}
-      <header className="pt-8 pb-4 px-4">
+      <header className="pt-12 pb-4 px-4">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold text-[#1A1A1A] font-headline">Design Friend</h1>
           <div className="text-right">
@@ -57,7 +57,7 @@ export default function DiscoveryFeed() {
             key={currentImage.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-sm mx-auto w-full mt-4 px-2"
+            className="max-w-sm mx-auto w-full mt-4 px-4"
           >
             <h2 className="text-xl font-bold text-[#1A1A1A] font-headline uppercase tracking-wide">
               {currentImage.style}

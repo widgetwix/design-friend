@@ -187,7 +187,9 @@ export default function AuthModal({ isOpen, onClose }) {
                       </label>
                       <input
                         id="auth-name"
+                        name="fullname"
                         type="text"
+                        autoComplete="name"
                         placeholder="Jane Doe"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -209,7 +211,9 @@ export default function AuthModal({ isOpen, onClose }) {
                     </label>
                     <input
                       id="auth-email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       placeholder="YOUR@EMAIL.COM"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -230,7 +234,9 @@ export default function AuthModal({ isOpen, onClose }) {
                     </label>
                     <input
                       id="auth-password"
+                      name="password"
                       type="password"
+                      autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}

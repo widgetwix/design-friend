@@ -59,9 +59,11 @@ export default function AnnotationModal({ isOpen, onClose, onSubmit, position })
             <form onSubmit={handleSubmit}>
               <div className="relative">
                 <textarea
+                  name="annotation-note"
                   value={note}
                   onChange={handleNoteChange}
                   placeholder="e.g., I love the velvet texture, the warm lighting..."
+                  autoComplete="off"
                   className="w-full h-28 p-4 border border-[#1A1A1A] bg-transparent resize-none focus:outline-none focus:ring-2 focus:ring-[#C84C35] text-[#1A1A1A]"
                   autoFocus
                   maxLength={MAX_CHARS}
