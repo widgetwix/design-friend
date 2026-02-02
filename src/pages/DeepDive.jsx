@@ -60,7 +60,7 @@ export default function DeepDive() {
   return (
     <div className="min-h-screen bg-[#F2E6DF] flex flex-col">
       {/* Header */}
-      <header className="pt-8 px-4 pb-4">
+      <header className="pt-12 px-4 pb-4">
         <div className="flex items-center">
           <button
             onClick={() => setStage('discovery')}
@@ -143,9 +143,11 @@ export default function DeepDive() {
 
         <div className="relative mb-6">
           <textarea
+            name="design-note"
             value={note}
             onChange={handleNoteChange}
             placeholder="I love the velvet texture..."
+            autoComplete="off"
             className="w-full h-24 p-4 border border-[#1A1A1A]/20 bg-white rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#C84C35] focus:border-transparent text-[#1A1A1A] placeholder:text-[#1A1A1A]/40"
             maxLength={MAX_CHARS}
           />

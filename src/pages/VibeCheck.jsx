@@ -41,7 +41,7 @@ export default function VibeCheck() {
   return (
     <div className="min-h-screen bg-[#F2E6DF] flex flex-col">
       {/* Header */}
-      <header className="pt-8 px-4 pb-4">
+      <header className="pt-12 px-4 pb-4">
         <div className="flex items-center justify-between">
           <button
             onClick={handleClose}
@@ -67,7 +67,7 @@ export default function VibeCheck() {
       </header>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 pb-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8">
         {/* Image Collage */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

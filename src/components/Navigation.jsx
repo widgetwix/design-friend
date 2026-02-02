@@ -34,7 +34,7 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-[#F2E6DF] border-t border-[#1A1A1A] px-6 py-2 safe-area-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 bg-[#F2E6DF] border-t border-[#1A1A1A] px-6 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] z-30">
       <div className="flex justify-around items-center max-w-md mx-auto">
         {tabs.map((tab) => {
           const isActive = stage === tab.id;
